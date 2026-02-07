@@ -1,0 +1,70 @@
+services:
+  matthesketh-pro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: matthesketh-pro
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:60610:60610"
+    environment:
+      - NODE_ENV=production
+      - PORT=60610
+      - ORIGIN=https://matthesketh.pro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:60610/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+  chat:
+    build:
+      context: ./chat
+      dockerfile: Dockerfile
+    container_name: matthesketh-pro-chat
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3092:3092"
+    environment:
+      - NODE_ENV=production
+      - PORT=3092
+      - CORS_ORIGIN=https://chat.matthesketh.pro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3092/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+networks:
+  default:
+    driver: bridge

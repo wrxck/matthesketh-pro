@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Socket.IO Test Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        .disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+        .message {
+            padding: 5px;
+            margin: 5px 0;
+            border-left: 3px solid #007bff;
+            background: white;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Socket.IO Chat Test Client</h1>
+
+        <div id="status" class="status disconnected">
+            Status: Disconnected
+        </div>
+
+        <div>
+            <input type="text" id="messageInput" placeholder="Type a message..." style="width: 70%">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <div id="messages"></div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://localhost:3092', {
+            transports: ['websocket', 'polling']
+        });
+
+        const statusEl = document.getElementById('status');
+        const messagesEl = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+
+        socket.on('connect', () => {
+            statusEl.className = 'status connected';
+            statusEl.textContent = `Status: Connected (ID: ${socket.id})`;
+            addMessage('System', 'Connected to chat server');
+        });
+
+        socket.on('disconnect', () => {
+            statusEl.className = 'status disconnected';
+            statusEl.textContent = 'Status: Disconnected';
+            addMessage('System', 'Disconnected from chat server');
+        });
+
+        socket.on('welcome', (data) => {
+            addMessage('Server', JSON.stringify(data, null, 2));
+        });
+
+        socket.on('message', (data) => {
+            addMessage('User ' + data.from, data.text || JSON.stringify(data));
+        });
+
+        socket.on('typing', (data) => {
+            addMessage('Typing', `User ${data.userId} is typing...`);
+        });
+
+        function addMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message';
+            msgDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            messagesEl.appendChild(msgDiv);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (text) {
+                socket.emit('message', { text });
+                addMessage('You', text);
+                messageInput.value = '';
+            }
+        }
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        messageInput.addEventListener('input', () => {
+            socket.emit('typing', { isTyping: true });
+        });
+    </script>
+</body>
+</html>

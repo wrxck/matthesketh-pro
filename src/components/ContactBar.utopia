@@ -1,0 +1,64 @@
+<template>
+  <div class="contact-bar">
+    <a
+      u-for="link in links"
+      :href="link.url"
+      class="contact-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      [{{ link.label }}]
+    </a>
+  </div>
+</template>
+
+<script>
+import { contact } from '../data/cv'
+
+const links = contact
+</script>
+
+<style scoped>
+.contact-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  color: #f0f;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-link:hover {
+  color: #0ff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+@media print {
+  .contact-link {
+    color: #000;
+    text-decoration: underline;
+  }
+  .contact-link::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75em;
+    color: #666;
+  }
+}
+</style>
+
+<test>
+import { describe, it, expect } from 'vitest'
+import { render } from '@matthesketh/utopia-test'
+
+describe('ContactBar', () => {
+  it('renders contact links', () => {
+    const { getByText, unmount } = render(self)
+    expect(getByText('[email]')).toBeTruthy()
+    expect(getByText('[github]')).toBeTruthy()
+    unmount()
+  })
+})
+</test>

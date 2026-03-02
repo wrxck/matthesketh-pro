@@ -1,0 +1,25 @@
+{
+  "name": "cv-matthesketh-pro",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Matt Hesketh's CV — Terminal Resume",
+  "type": "module",
+  "scripts": {
+    "dev": "utopia dev",
+    "build": "utopia build",
+    "preview": "utopia preview",
+    "test": "utopia test"
+  },
+  "dependencies": {
+    "@matthesketh/utopia-core": "^0.3.0",
+    "@matthesketh/utopia-runtime": "^0.3.0"
+  },
+  "devDependencies": {
+    "@matthesketh/utopia-cli": "^0.3.0",
+    "@matthesketh/utopia-test": "^0.5.0",
+    "@matthesketh/utopia-vite-plugin": "^0.3.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}

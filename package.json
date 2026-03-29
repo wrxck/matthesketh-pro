@@ -1,27 +1,30 @@
 {
-  "name": "matthesketh.pro",
-  "version": "1.0.0",
+  "name": "personal-landing-page",
   "private": true,
+  "version": "0.0.1",
+  "description": "Config-driven personal landing page built with UtopiaJS",
+  "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "utopia dev",
+    "validate": "tsx scripts/validate-config.ts",
+    "prebuild": "tsx scripts/validate-config.ts",
+    "build": "utopia build",
+    "preview": "utopia preview"
+  },
+  "dependencies": {
+    "@matthesketh/utopia-core": "^0.7.0",
+    "@matthesketh/utopia-runtime": "^0.7.0"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "7.0.0",
-    "@sveltejs/adapter-node": "^5.5.2",
-    "@sveltejs/kit": "2.50.1",
-    "@sveltejs/vite-plugin-svelte": "6.2.4",
-    "svelte": "5.49.1",
-    "typescript": "5.9.3",
-    "vite": "7.3.1"
+    "@matthesketh/utopia-cli": "^0.7.2",
+    "@matthesketh/utopia-vite-plugin": "^0.7.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
   },
-  "type": "module",
-  "dependencies": {
-    "@threlte/core": "^8.3.1",
-    "@threlte/extras": "^9.7.1",
-    "@types/three": "^0.182.0",
-    "postprocessing": "^6.38.2",
-    "three": "^0.182.0"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

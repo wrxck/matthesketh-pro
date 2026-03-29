@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} — {{title}}</title>
+  <meta name="description" content="{{name}} — {{description}}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="{{themeColor}}">
+  <link rel="canonical" href="{{url}}/">
+  <meta property="og:title" content="{{name}} — {{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{url}}/">
+  <meta property="og:locale" content="{{locale}}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{name}} — {{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{name}}",
+    "jobTitle": "{{title}}",
+    "url": "{{url}}",
+    "sameAs": [
+      "{{contact.github}}",
+      "{{contact.linkedin}}"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <noscript>
+    <p>{{name}} — {{title}}. Enable JavaScript to view.</p>
+  </noscript>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

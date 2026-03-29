@@ -1,10 +1,8 @@
 node_modules/
 dist/
+.cache/
 *.tsbuildinfo
 .DS_Store
-*.local
 .env
 .env.*
 !.env.example
-coverage/
-*.utopia.test.ts

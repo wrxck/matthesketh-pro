@@ -65,7 +65,8 @@
 </template>
 
 <script>
-import { identity, experience, projects } from './data/cv'
+import { config } from '../site.config'
+const { identity, experience, projects } = config
 import Terminal from './components/Terminal.utopia'
 import CommandBlock from './components/CommandBlock.utopia'
 import ContactBar from './components/ContactBar.utopia'

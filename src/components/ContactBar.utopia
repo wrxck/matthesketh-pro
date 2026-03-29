@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { contact } from '../data/cv'
+import { config } from '../../site.config'
+const { contact } = config
 
 const links = contact
 </script>

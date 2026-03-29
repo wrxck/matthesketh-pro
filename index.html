@@ -3,14 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matt Hesketh — CV</title>
-  <meta name="description" content="Matt Hesketh — Software Engineer. Full-stack, mainframe, AI specialist.">
+  <title>{{identity.name}} — CV</title>
+  <meta name="description" content="{{identity.name}} — {{identity.title}}. CV and portfolio.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="{{themeColor}}">
+  <link rel="canonical" href="{{url}}/">
+  <meta property="og:title" content="{{identity.name}} — CV">
+  <meta property="og:description" content="{{identity.name}} — {{identity.title}}. CV and portfolio.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{url}}/">
+  <meta property="og:locale" content="{{locale}}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{identity.name}} — CV">
+  <meta name="twitter:description" content="{{identity.name}} — {{identity.title}}. CV and portfolio.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{identity.name}}",
+    "jobTitle": "{{identity.title}}",
+    "url": "{{url}}"
+  }
+  </script>
 </head>
 <body>
   <div id="app"></div>
+  <noscript>
+    <p>{{identity.name}} — {{identity.title}}. Enable JavaScript to view the full CV.</p>
+  </noscript>
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

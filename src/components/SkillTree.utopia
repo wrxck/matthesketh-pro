@@ -14,7 +14,8 @@
 
 <script>
 import { signal } from '@matthesketh/utopia-core'
-import { skills } from '../data/cv'
+import { config } from '../../site.config'
+const { skills } = config
 
 const categories = skills
 const openCategories = signal(new Set(skills.map(s => s.name)))

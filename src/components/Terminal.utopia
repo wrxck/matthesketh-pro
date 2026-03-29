@@ -6,7 +6,7 @@
         <span class="dot dot-yellow"></span>
         <span class="dot dot-green"></span>
       </div>
-      <span class="terminal-title">matt@hesketh ~ cv</span>
+      <span class="terminal-title">{{ config.terminalPrompt }}</span>
     </div>
     <div class="terminal-body">
       <slot />
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { config } from '../../site.config'
 </script>
 
 <style scoped>
@@ -107,7 +108,7 @@ describe('Terminal', () => {
   it('renders terminal chrome', () => {
     const { getBySelector, getByText, unmount } = render(self)
     expect(getBySelector('.terminal-bar')).toBeTruthy()
-    expect(getByText('matt@hesketh ~ cv')).toBeTruthy()
+    expect(getByText('user@host ~ cv')).toBeTruthy()
     unmount()
   })
 })

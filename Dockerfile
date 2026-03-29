@@ -1,44 +1,20 @@
-# Build stage
 FROM node:20-alpine AS builder
-
 WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
+COPY . .
+RUN pnpm build
 
-COPY package.json package-lock.json ./
-RUN npm ci
-
-COPY svelte.config.js vite.config.ts tsconfig.json ./
-COPY src/ ./src/
-COPY static/ ./static/
-
-RUN npm run build
-
-# Production stage
-FROM node:20-alpine
-
-RUN apk add --no-cache dumb-init curl
-
-WORKDIR /app
-
-RUN addgroup -g 1001 -S appuser && \
-    adduser -S appuser -u 1001 -G appuser
-
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev && npm cache clean --force
-
-COPY --from=builder /app/build ./build
-
-RUN chown -R appuser:appuser /app
-
-USER appuser
-
-ENV NODE_ENV=production
-ENV PORT=60610
-ENV ORIGIN=https://matthesketh.pro
-
+FROM nginx:alpine
+RUN apk add --no-cache curl && \
+    mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp \
+             /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp \
+             /var/cache/nginx/scgi_temp && \
+    chown -R nginx:nginx /var/cache/nginx /run /var/log/nginx /etc/nginx/conf.d
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 60610
+USER nginx
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:60610/ || exit 1
-
-ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "build"]
+  CMD curl -f http://localhost:60610/ || exit 1

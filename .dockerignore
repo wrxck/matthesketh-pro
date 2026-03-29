@@ -1,8 +1,4 @@
 node_modules
-build
-.svelte-kit
-.env
-*.log
+dist
 .git
-.vscode
-.cursor
+.cache

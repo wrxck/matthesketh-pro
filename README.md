@@ -1,4 +1,4 @@
-# Terminal CV
+# CV / Resume
 
 ![UtopiaJS](https://img.shields.io/badge/UtopiaJS-framework-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript&logoColor=white)
@@ -6,7 +6,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A config-driven CV/resume site with a terminal-inspired design, built with [UtopiaJS](https://github.com/wrxck/utopiajs) and Vite. Includes PDF export.
+A minimal, config-driven CV site built with [UtopiaJS](https://github.com/wrxck/utopiajs) and Vite. Two-column layout with sticky sidebar, timeline experience, skills grid, and PDF export. Black and white design.
 
 ## Quick Start
 
@@ -35,7 +35,6 @@ Edit `site.config.ts` at the project root. This single file contains all your CV
 | `locale` | Locale code (e.g. `en_GB`) |
 | `themeColor` | Browser theme color (hex) |
 | `sentryDsn` | Sentry DSN for error tracking (leave empty to disable) |
-| `terminalPrompt` | Terminal title bar text (e.g. `user@host ~ cv`) |
 | `pdfFilename` | Filename for PDF export (without `.pdf`) |
 
 ### CV Data
@@ -62,7 +61,7 @@ Opens at `http://localhost:5173`.
 
 ## PDF Export
 
-Click the "Export PDF" button on the site. The PDF is generated client-side using `@react-pdf/renderer`.
+Click the "Export PDF" button in the sidebar. The PDF is generated client-side using `@react-pdf/renderer`.
 
 ## Deployment
 

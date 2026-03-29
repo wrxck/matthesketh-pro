@@ -38,13 +38,5 @@ export interface SiteConfig {
   skills: SkillCategory[]
   projects: Project[]
   contact: ContactLink[]
-  terminalPrompt: string
-  commands: {
-    whoami: string
-    experience: string
-    skills: string
-    projects: string
-    contact: string
-  }
   pdfFilename: string
 }

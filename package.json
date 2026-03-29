@@ -1,30 +1,28 @@
 {
-  "name": "terminal-cv",
+  "name": "cv-resume",
   "private": true,
   "version": "0.0.1",
-  "description": "Config-driven terminal CV built with UtopiaJS",
+  "description": "Config-driven CV/resume built with UtopiaJS",
   "type": "module",
   "scripts": {
     "dev": "utopia dev",
     "validate": "tsx scripts/validate-config.ts",
     "prebuild": "tsx scripts/validate-config.ts",
     "build": "utopia build",
-    "preview": "utopia preview",
-    "test": "vitest"
+    "preview": "utopia preview"
   },
   "dependencies": {
     "@matthesketh/utopia-core": "^0.5.0",
-    "@matthesketh/utopia-runtime": "^0.5.0"
+    "@matthesketh/utopia-runtime": "^0.5.0",
+    "@react-pdf/renderer": "^4.3.2",
+    "react": "^19.2.4"
   },
   "devDependencies": {
     "@matthesketh/utopia-cli": "^0.5.0",
-    "@matthesketh/utopia-test": "^0.5.0",
     "@matthesketh/utopia-vite-plugin": "^0.5.0",
-    "jsdom": "^24.1.3",
     "tsx": "^4.21.0",
     "typescript": "^5.7.0",
-    "vite": "^6.0.0",
-    "vitest": "^3.0.0"
+    "vite": "^6.0.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

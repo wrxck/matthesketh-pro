@@ -1,153 +1,506 @@
 <template>
-  <div class="cv-page">
-    <Terminal>
-      <section data-command="$ whoami">
-        <CommandBlock command="$ whoami" :delay="200">
-          <div class="whoami">
-            <h1 class="name">{{ identity.name }}</h1>
-            <p class="title">{{ identity.title }}</p>
-            <p class="summary">{{ identity.summary }}</p>
-            <ContactBar />
+  <div class="app-container">
+    <div class="glass-matrix">
+      <aside class="sidebar">
+        <div>
+          <h1 class="name">{{ config.identity.name }}</h1>
+          <p class="role-title">{{ config.identity.title }}</p>
+        </div>
+
+        <div class="summary" u-if="!expanded()">
+          <p>{{ truncatedSummary() }}</p>
+          <button class="expand-btn" @click="() => expanded.set(true)" u-if="config.identity.summary.length > 200">
+            Read more
+          </button>
+        </div>
+        <div class="summary" u-if="expanded()">
+          <p>{{ config.identity.summary }}</p>
+          <button class="expand-btn" @click="() => expanded.set(false)">
+            Show less
+          </button>
+        </div>
+
+        <div class="contact-links">
+          <a
+            u-for="link in config.contact"
+            :href="link.url"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg u-if="link.label === 'email'" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/><path d="M3 7l9 6l9 -6"/></svg>
+            <svg u-if="link.label === 'github'" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"/></svg>
+            <svg u-if="link.label === 'linkedin'" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11v5"/><path d="M8 8v.01"/><path d="M12 16v-5"/><path d="M16 16v-3a2 2 0 1 0 -4 0"/><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10"/></svg>
+            <svg u-if="link.label === 'portfolio'" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M3.6 9h16.8"/><path d="M3.6 15h16.8"/><path d="M12 3a12 12 0 0 1 0 18"/><path d="M12 3a12 12 0 0 0 0 18"/></svg>
+            {{ link.label }}
+          </a>
+          <button class="social-link export-btn" @click="exportPdf">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M12 17v-6"/><path d="M9.5 14.5l2.5 2.5l2.5 -2.5"/></svg>
+            Export PDF
+          </button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section>
+          <h2 class="section-title">Experience</h2>
+          <div class="timeline">
+            <div u-for="exp in config.experience" class="timeline-item card-hover">
+              <div class="timeline-dot"></div>
+              <div class="entry-head">
+                <h3 class="company">{{ exp.company }}</h3>
+                <span class="period">{{ exp.period }}</span>
+              </div>
+              <p class="job-title">{{ exp.title }}</p>
+              <ul class="bullets">
+                <li u-for="bullet in exp.bullets">{{ bullet }}</li>
+              </ul>
+              <div class="pills" u-if="exp.stack && exp.stack.length > 0">
+                <span u-for="tech in exp.stack" class="pill">{{ tech }}</span>
+              </div>
+            </div>
           </div>
-        </CommandBlock>
-      </section>
+        </section>
 
-      <section data-command="$ cat experience.md">
-        <CommandBlock command="$ cat experience.md" :delay="800">
-          <div class="experience">
-            <ExperienceCard
-              u-for="exp in experience"
-              :company="exp.company"
-              :title="exp.title"
-              :period="exp.period"
-              :bullets="exp.bullets"
-              :stack="exp.stack || []"
-            />
+        <section>
+          <h2 class="section-title">Skills</h2>
+          <div class="skills-grid">
+            <div u-for="cat in config.skills" class="card-hover">
+              <h3 class="skill-cat">{{ cat.name }}</h3>
+              <div class="pills">
+                <span u-for="item in cat.items" class="pill">{{ item }}</span>
+              </div>
+            </div>
           </div>
-        </CommandBlock>
-      </section>
+        </section>
 
-      <section data-command="$ ls -la skills/">
-        <CommandBlock command="$ ls -la skills/" :delay="1400">
-          <SkillTree />
-        </CommandBlock>
-      </section>
-
-      <section data-command="$ cat projects/utopiajs.md">
-        <CommandBlock command="$ cat projects/utopiajs.md" :delay="2000">
-          <div class="projects">
-            <ProjectCard
-              u-for="proj in projects"
-              :name="proj.name"
-              :description="proj.description"
-              :details="proj.details"
-              :url="proj.url || ''"
-            />
+        <section>
+          <h2 class="section-title">Projects</h2>
+          <div class="projects-list">
+            <div u-for="proj in config.projects" class="card-hover">
+              <div class="project-head">
+                <h3 class="project-name">{{ proj.name }}</h3>
+                <a u-if="proj.url" :href="proj.url" class="project-link" target="_blank" rel="noopener noreferrer">View &rarr;</a>
+              </div>
+              <p class="project-desc">{{ proj.description }}</p>
+              <ul class="bullets">
+                <li u-for="detail in proj.details">{{ detail }}</li>
+              </ul>
+            </div>
           </div>
-        </CommandBlock>
-      </section>
-
-      <section data-command="$ echo $CONTACT">
-        <CommandBlock command="$ echo $CONTACT" :delay="2600">
-          <ContactBar />
-        </CommandBlock>
-      </section>
-
-      <div class="final-cursor">
-        <Cursor />
-      </div>
-    </Terminal>
-
-    <footer class="built-with">
-      Built with <a href="https://github.com/wrxck/utopiajs" target="_blank" rel="noopener noreferrer">UtopiaJS</a>
-    </footer>
+        </section>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import { signal } from '@matthesketh/utopia-core'
 import { config } from '../site.config'
-const { identity, experience, projects } = config
-import Terminal from './components/Terminal.utopia'
-import CommandBlock from './components/CommandBlock.utopia'
-import ContactBar from './components/ContactBar.utopia'
-import ExperienceCard from './components/ExperienceCard.utopia'
-import SkillTree from './components/SkillTree.utopia'
-import ProjectCard from './components/ProjectCard.utopia'
-import Cursor from './components/Cursor.utopia'
+
+const expanded = signal(false)
+
+function truncatedSummary() {
+  const s = config.identity.summary
+  if (s.length <= 200) return s
+  return s.slice(0, 200).replace(/\s+\S*$/, '') + '...'
+}
+
+async function exportPdf() {
+  const { generatePdf } = await import('./pdf')
+  const blob = await generatePdf()
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = config.pdfFilename + '.pdf'
+  a.click()
+  URL.revokeObjectURL(url)
+}
 </script>
 
 <style scoped>
-.cv-page {
+.app-container {
+  position: relative;
   min-height: 100vh;
-  background: #050505;
-  padding: 1rem;
+  width: 100%;
 }
 
-.whoami .name {
-  font-family: 'Rubik Mono One', monospace;
-  color: #0ff;
-  font-size: 1.8rem;
-  margin: 0 0 0.25rem 0;
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+.glass-matrix {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  min-height: 100vh;
 }
 
-.whoami .title {
-  color: #f0f;
-  font-size: 1rem;
-  margin: 0 0 0.5rem 0;
+.name {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin: 0;
+  color: #000;
 }
 
-.whoami .summary {
-  color: #e0e0e0;
-  font-size: 0.85rem;
-  margin: 0 0 1rem 0;
-  line-height: 1.6;
+.role-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #000;
+  margin: 0.5rem 0 0;
 }
 
-.final-cursor {
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sidebar {
+  flex: 0 0 35%;
+  position: sticky;
+  top: 4rem;
+  height: max-content;
+  max-height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: #fff;
+  border: 2px solid #000;
+  overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.summary {
+  color: #000;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.summary p {
+  margin: 0 0 1rem;
+}
+
+.summary p:last-child {
+  margin: 0;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  padding: 0;
   margin-top: 1rem;
+  color: #000;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.built-with {
-  text-align: center;
-  color: #333;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  padding: 1rem;
-}
-
-.built-with a {
-  color: #0ff;
+.expand-btn:hover {
   text-decoration: none;
+  background: #000;
+  color: #fff;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.social-link:hover {
+  border-bottom-color: #000;
+}
+
+.export-btn {
+  margin-top: 0.5rem;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding-bottom: 4rem;
+}
+
+.card-hover {
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #000;
+  transition: background 0.1s ease-in-out;
+}
+
+.card-hover:hover {
+  background: #000;
+  color: #fff;
+}
+
+.card-hover:hover .company,
+.card-hover:hover .period,
+.card-hover:hover .job-title,
+.card-hover:hover .bullets,
+.card-hover:hover .skill-cat,
+.card-hover:hover .project-name,
+.card-hover:hover .project-desc,
+.card-hover:hover .project-link,
+.card-hover:hover .bullets li::marker {
+  color: #fff;
+}
+
+.card-hover:hover .pill {
+  border-color: #fff;
+  color: #fff;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-left: 2px solid #000;
+  margin-left: 1rem;
+  padding-left: 0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-left: 2rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.4rem;
+  top: 1.5rem;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border: 2px solid #fff;
+}
+
+.card-hover:hover .timeline-dot {
+  background: #fff;
+  border-color: #000;
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.company {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: #000;
+  margin: 0;
+}
+
+.period {
+  font-size: 0.85rem;
+  color: #000;
+  font-weight: 500;
+}
+
+.job-title {
+  color: #333;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #333;
+}
+
+.bullets li {
+  margin-bottom: 0.5rem;
+}
+
+.bullets li::marker {
+  color: #000;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-cat {
+  font-family: var(--font-heading);
+  color: #000;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.pill {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.project-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: #000;
+  margin: 0;
+}
+
+.project-desc {
+  color: #333;
+  margin: 0 0 1rem;
+  font-weight: 500;
+}
+
+.project-link {
+  color: #000;
+}
+
+@media (max-width: 900px) {
+  .glass-matrix {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 3rem;
+  }
+  .sidebar {
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+  .timeline {
+    margin-left: 0.5rem;
+  }
+  .timeline-item {
+    margin-left: 1.5rem;
+  }
+  .timeline-dot {
+    left: -1.9rem;
+  }
 }
 
 @media print {
-  .cv-page {
-    background: #fff;
+  .sidebar {
+    border: none;
     padding: 0;
-    min-height: auto;
+    margin-bottom: 2rem;
+    page-break-after: avoid;
   }
-
-  .whoami .name {
+  .section-title:after {
+    display: none;
+  }
+  .expand-btn,
+  .export-btn {
+    display: none;
+  }
+  .contact-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .social-link svg {
+    display: none;
+  }
+  .content {
+    display: block;
+    gap: 2rem;
+    padding: 0;
+  }
+  .card-hover {
+    padding: 0;
+    border: none !important;
+  }
+  .card-hover:hover {
+    background: transparent;
     color: #000;
-    font-size: 1.5rem;
-    text-shadow: none;
   }
-
-  .whoami .title {
-    color: #333;
+  .timeline {
+    border-left: none;
+    margin: 0;
+    padding: 0;
   }
-
-  .whoami .summary {
-    color: #000;
+  .timeline-item {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    page-break-inside: avoid;
   }
-
-  .final-cursor { display: none; }
-  .built-with { display: none; }
-}
-
-@page {
-  size: A4;
-  margin: 1.5cm;
+  .timeline-dot {
+    display: none;
+  }
+  .pills {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  .pill {
+    display: inline-block;
+    border: none;
+    padding: 0;
+    background: transparent;
+    margin: 0 8px 0 0;
+  }
+  .pill:after {
+    content: ",";
+  }
+  .pill:last-child:after {
+    content: "";
+  }
 }
 </style>

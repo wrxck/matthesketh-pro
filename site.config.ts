@@ -3,7 +3,7 @@ import type { SiteConfig } from './site.config.types'
 export const config: SiteConfig = {
   // Meta (used in index.html)
   locale: 'en_GB',
-  themeColor: '#050505',
+  themeColor: '#ffffff',
   url: 'https://cv.yourdomain.com',
   sentryDsn: '', // Leave empty to disable Sentry
 
@@ -46,18 +46,6 @@ export const config: SiteConfig = {
     { label: 'github', url: 'https://github.com/yourusername', icon: '>' },
     { label: 'linkedin', url: 'https://www.linkedin.com/in/yourprofile', icon: '>' },
   ],
-
-  // Terminal prompt (displayed in the title bar)
-  terminalPrompt: 'user@host ~ cv',
-
-  // Terminal command labels
-  commands: {
-    whoami: '$ whoami',
-    experience: '$ cat experience.md',
-    skills: '$ ls -la skills/',
-    projects: '$ cat projects/readme.md',
-    contact: '$ echo $CONTACT',
-  },
 
   // PDF export filename (without extension)
   pdfFilename: 'Your_Name_CV',

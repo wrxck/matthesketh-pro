@@ -1,19 +1,27 @@
 # Terminal CV
 
+![UtopiaJS](https://img.shields.io/badge/UtopiaJS-framework-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6-purple?logo=vite&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 A config-driven CV/resume site with a terminal-inspired design, built with [UtopiaJS](https://github.com/wrxck/utopiajs) and Vite. Includes PDF export.
 
 ## Quick Start
 
-1. Clone this repo
-2. Edit `site.config.ts` with your details (experience, skills, projects, contact)
-3. Install and build:
-
 ```bash
+# 1. Use this template on GitHub (or clone)
+git clone https://github.com/wrxck/cv-matthesketh-pro.git my-cv
+cd my-cv
+
+# 2. Edit site.config.ts with your experience, skills, projects, contact
+# 3. Install and build
 pnpm install
 pnpm build
 ```
 
-The build will fail if `site.config.ts` still contains placeholder values.
+The build will fail if `site.config.ts` still contains placeholder values — you'll see clear error messages telling you what to change.
 
 ## Configuration
 
@@ -27,6 +35,7 @@ Edit `site.config.ts` at the project root. This single file contains all your CV
 | `locale` | Locale code (e.g. `en_GB`) |
 | `themeColor` | Browser theme color (hex) |
 | `sentryDsn` | Sentry DSN for error tracking (leave empty to disable) |
+| `terminalPrompt` | Terminal title bar text (e.g. `user@host ~ cv`) |
 | `pdfFilename` | Filename for PDF export (without `.pdf`) |
 
 ### CV Data
@@ -70,3 +79,8 @@ To enable Sentry, set `sentryDsn` in `site.config.ts` to your DSN.
 ### Static
 
 The `dist/` folder after `pnpm build` is a static site. Deploy to any static host.
+
+## Related Templates
+
+- [Personal Landing Page](https://github.com/wrxck/matthesketh-pro) — Minimal config-driven landing page
+- [Blog with Admin](https://github.com/wrxck/blog-matthesketh-pro) — Blog with WebAuthn admin panel, RSS/Atom feeds

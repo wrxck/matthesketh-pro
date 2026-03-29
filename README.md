@@ -65,5 +65,5 @@ The `dist/` folder after `pnpm build` is a static site. Deploy to any static hos
 
 ## Related Templates
 
-- [Terminal CV](https://github.com/wrxck/cv-matthesketh-pro) — Config-driven CV with terminal design and PDF export
+- [CV / Resume](https://github.com/wrxck/cv-matthesketh-pro) — Config-driven CV with two-column layout and PDF export
 - [Blog with Admin](https://github.com/wrxck/blog-matthesketh-pro) — Blog with WebAuthn admin panel, RSS/Atom feeds

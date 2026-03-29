@@ -1,8 +1,8 @@
 {
-  "name": "matthesketh-pro",
+  "name": "personal-landing-page",
   "private": true,
   "version": "0.0.1",
-  "description": "Matt Hesketh — Software Engineer",
+  "description": "Config-driven personal landing page built with UtopiaJS",
   "type": "module",
   "scripts": {
     "dev": "utopia dev",

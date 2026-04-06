@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@matthesketh/utopia-core':
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.7.0
+        version: 0.7.1
       '@matthesketh/utopia-runtime':
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.7.0
+        version: 0.7.3
       '@react-pdf/renderer':
         specifier: ^4.3.2
         version: 4.3.2(react@19.2.4)
@@ -22,11 +22,11 @@ importers:
         version: 19.2.4
     devDependencies:
       '@matthesketh/utopia-cli':
-        specifier: ^0.5.0
-        version: 0.5.0(vite@6.4.1(tsx@4.21.0))(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))
+        specifier: ^0.7.0
+        version: 0.7.4(vite@6.4.1(tsx@4.21.0))(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))
       '@matthesketh/utopia-vite-plugin':
-        specifier: ^0.5.0
-        version: 0.5.0(vite@6.4.1(tsx@4.21.0))
+        specifier: ^0.7.0
+        version: 0.7.2(vite@6.4.1(tsx@4.21.0))
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -389,34 +389,46 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@matthesketh/utopia-cli@0.5.0':
-    resolution: {integrity: sha512-KebG30QHRU1MGRDmeGLqxBQiKJayEZ1lyzwYrsopjvFPDldNtNGjbTlD/cwwViHWJyvzcucvGLRQGy5wgXmrkw==}
+  '@matthesketh/utopia-cli@0.7.4':
+    resolution: {integrity: sha512-2t6SM5+onpF5fc9VjM32iucuiz99ZpadXoZATlY6JTEVtjgi3JTchctpVAflcU7o5ZJuZA2jVdpEqfKLv1MeHA==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
       vitest: ^3.0.0
 
-  '@matthesketh/utopia-compiler@0.5.0':
-    resolution: {integrity: sha512-KRG+vx8oN1tKQWz11rMC99m5E7ywx3g6dCYq8LsUJQ5MgVJB+pjGKQVsUTNCbxz3LhmkXMwyvyh3zrFnBcOPxw==}
+  '@matthesketh/utopia-compiler@0.7.0':
+    resolution: {integrity: sha512-e/ulJGDBLyqEuSmv8wi4o0Z+z0ywns7gsQD5aoLtUcS1tbxMbgAi8p58k1OHa8fgkiHEp8bWaBCe0oJ4I/X3eg==}
     engines: {node: '>=20.0.0'}
 
-  '@matthesketh/utopia-core@0.5.0':
-    resolution: {integrity: sha512-w6WS36R910sI5Ooljo49t0mIaEyxOQ7lUnS4hXENiXJuOwn6M73nF3WsiL55PLbatnrdyuO+fjdVHigps6yY3w==}
+  '@matthesketh/utopia-compiler@0.7.3':
+    resolution: {integrity: sha512-/a7v/XvsXD+FBgiRaWRWVOAjnRPvq5NDJqNWi/4kiYl0PkrkLePRiG/Fj0SSYP9usoENC3V2hcaj3cP6TILnSQ==}
     engines: {node: '>=20.0.0'}
 
-  '@matthesketh/utopia-runtime@0.5.0':
-    resolution: {integrity: sha512-b5VItH17THn2gXG1q5ius77xfzrNET/3X8IdrD9LMc4DTJC70c7fcMrlfaIUcx+e8PKBTbVWgcNQS0jC4a0Lng==}
+  '@matthesketh/utopia-core@0.7.0':
+    resolution: {integrity: sha512-YPEe+tAG4nnZ8RxkSPG+kajkmS9dtNOZgvHSSHNTZKJugLK5KUzAvsLKO75gTHWQi08AykGuyN3IckgTjMi9SA==}
     engines: {node: '>=20.0.0'}
 
-  '@matthesketh/utopia-test@0.5.0':
-    resolution: {integrity: sha512-TTxXHGhvzOjVUW7y1Bt/QpMMptmd6UOmTOSE2jl0gTG7HNy/EIenEi17han9WOFhfiUg2Iu0EVEUAXxzrySQUQ==}
+  '@matthesketh/utopia-core@0.7.1':
+    resolution: {integrity: sha512-EHxevk3Zy2jEQ6fUT6aJTXzJHfskIZMn2PmQJ2qk6JVkncE/pSM5+N2jhBxF8BTuJDZ/XRAcg66UH8txJYNSGA==}
+    engines: {node: '>=20.0.0'}
+
+  '@matthesketh/utopia-runtime@0.7.0':
+    resolution: {integrity: sha512-4C3T9PgLWvmeE4ll9OuNXseuuTkfrrO2x70IwZVj04Cf1wdEOsvgwySt7c9TnAElP5XW+ZvNkKouIrNRUOUQEg==}
+    engines: {node: '>=20.0.0'}
+
+  '@matthesketh/utopia-runtime@0.7.3':
+    resolution: {integrity: sha512-6J0znyHzvIq9q4DACkV9ogeJZk3ebl9SQhxsUTScdpZbu/uLljk6xoaWpcv742bg/O8t8ku8Z6Fxs9WN74OYoQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@matthesketh/utopia-test@0.7.0':
+    resolution: {integrity: sha512-809ayJU1v/U+n9TQ2lQdfhKO710NwN96p+wn4o+QEQKZ5NCaSCvXMfFGbQf7U45Tt2xC+bAw8JUYUq0fRKKp1Q==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       vitest: ^3.0.0
 
-  '@matthesketh/utopia-vite-plugin@0.5.0':
-    resolution: {integrity: sha512-+ynWZbkJ7/4Fsvh7tvxuKjqiRKBdSiXSoXq0xO6/+5Bg8PLlPKNBJ+m31kuYdJnwebdsyVKIsPzfRE81cHykWg==}
+  '@matthesketh/utopia-vite-plugin@0.7.2':
+    resolution: {integrity: sha512-yMZOUKPIo0cghkepVLOB9Y2Iizm0E1qcJaAAHylvPhLJxl6vdjHSdUArQlj4VI+u1snybDGOyY1y/s5Q/RtgkA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
@@ -1450,32 +1462,42 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@matthesketh/utopia-cli@0.5.0(vite@6.4.1(tsx@4.21.0))(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))':
+  '@matthesketh/utopia-cli@0.7.4(vite@6.4.1(tsx@4.21.0))(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))':
     dependencies:
-      '@matthesketh/utopia-test': 0.5.0(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))
-      '@matthesketh/utopia-vite-plugin': 0.5.0(vite@6.4.1(tsx@4.21.0))
+      '@matthesketh/utopia-test': 0.7.0(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))
+      '@matthesketh/utopia-vite-plugin': 0.7.2(vite@6.4.1(tsx@4.21.0))
       vite: 6.4.1(tsx@4.21.0)
       vitest: 3.2.4(jsdom@24.1.3)(tsx@4.21.0)
 
-  '@matthesketh/utopia-compiler@0.5.0':
+  '@matthesketh/utopia-compiler@0.7.0':
     dependencies:
-      '@matthesketh/utopia-core': 0.5.0
+      '@matthesketh/utopia-core': 0.7.0
 
-  '@matthesketh/utopia-core@0.5.0': {}
-
-  '@matthesketh/utopia-runtime@0.5.0':
+  '@matthesketh/utopia-compiler@0.7.3':
     dependencies:
-      '@matthesketh/utopia-core': 0.5.0
+      '@matthesketh/utopia-core': 0.7.1
 
-  '@matthesketh/utopia-test@0.5.0(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))':
+  '@matthesketh/utopia-core@0.7.0': {}
+
+  '@matthesketh/utopia-core@0.7.1': {}
+
+  '@matthesketh/utopia-runtime@0.7.0':
     dependencies:
-      '@matthesketh/utopia-compiler': 0.5.0
-      '@matthesketh/utopia-runtime': 0.5.0
+      '@matthesketh/utopia-core': 0.7.0
+
+  '@matthesketh/utopia-runtime@0.7.3':
+    dependencies:
+      '@matthesketh/utopia-core': 0.7.1
+
+  '@matthesketh/utopia-test@0.7.0(vitest@3.2.4(jsdom@24.1.3)(tsx@4.21.0))':
+    dependencies:
+      '@matthesketh/utopia-compiler': 0.7.0
+      '@matthesketh/utopia-runtime': 0.7.0
       vitest: 3.2.4(jsdom@24.1.3)(tsx@4.21.0)
 
-  '@matthesketh/utopia-vite-plugin@0.5.0(vite@6.4.1(tsx@4.21.0))':
+  '@matthesketh/utopia-vite-plugin@0.7.2(vite@6.4.1(tsx@4.21.0))':
     dependencies:
-      '@matthesketh/utopia-compiler': 0.5.0
+      '@matthesketh/utopia-compiler': 0.7.3
       vite: 6.4.1(tsx@4.21.0)
 
   '@react-pdf/fns@3.1.2': {}

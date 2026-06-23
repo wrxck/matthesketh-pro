@@ -26,7 +26,12 @@ export const config = {
   },
 
   // -------------------------------------------------------------------------
-  // Open Source showcase — /open-source
+  // Open Source showcase — /open-source   (OPTIONAL)
+  //
+  // Delete this whole `openSource` block to drop the section: the route, the
+  // GitHub fetch, and the home tile all disappear automatically. Also remove
+  // the matching 'Open Source Software' entry from navCards above (or leave it
+  // — the home hides any card whose section isn't configured).
   //
   // `featured` is the curation list: it decides WHICH repos appear, their
   // order, their tile SIZE (span) and their THEME. Live data (stars, language,
@@ -167,9 +172,10 @@ export const config = {
   },
 
   // -------------------------------------------------------------------------
-  // Apps showcase — /apps
+  // Apps showcase — /apps   (OPTIONAL)
   //
-  // Hand-authored app tiles. Each inherits its own product brand via `theme`.
+  // Delete this whole `apps` block to drop the section (route + home tile go
+  // with it). Each tile inherits its own product brand via `theme`.
   // Grid scales as more apps ship; one tile is intentionally a large hero so a
   // single-app grid still reads as deliberate.
   // -------------------------------------------------------------------------

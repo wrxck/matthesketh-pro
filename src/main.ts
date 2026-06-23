@@ -6,15 +6,26 @@ import { hydrateRepoIndex } from './lib/store'
 import { installShowcaseKeys } from './lib/showcase'
 import './global.css'
 
-createRouter([
-  { path: '/', component: () => import('./routes/Landing.utopia') },
-  { path: '/open-source', component: () => import('./routes/OpenSource.utopia') },
-  { path: '/apps', component: () => import('./routes/Apps.utopia') },
-])
+// The two showcases are optional. A fork that drops `openSource` or `apps`
+// from site.config.ts gets the route (and its data fetch) skipped entirely,
+// rather than a crash.
+const routes = [{ path: '/', component: () => import('./routes/Landing.utopia') }]
 
-// Kick off the one-time GitHub fetch (non-blocking — pages render from config
-// immediately and hydrate live stars when it resolves).
-hydrateRepoIndex(config.openSource.username)
+if (config.openSource) {
+  routes.push({ path: '/open-source', component: () => import('./routes/OpenSource.utopia') })
+}
+if (config.apps && Array.isArray(config.apps.items) && config.apps.items.length > 0) {
+  routes.push({ path: '/apps', component: () => import('./routes/Apps.utopia') })
+}
+
+createRouter(routes)
+
+// Kick off the one-time GitHub fetch only when the Open Source showcase is
+// configured (non-blocking — pages render from config immediately and hydrate
+// live stars when it resolves).
+if (config.openSource) {
+  hydrateRepoIndex(config.openSource.username)
+}
 
 // Esc-to-close on the showcase routes.
 installShowcaseKeys()

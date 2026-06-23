@@ -8,7 +8,7 @@
 
     <nav class="home-grid" aria-label="Site navigation">
       <a
-        u-for="card in config.navCards"
+        u-for="card in visibleCards"
         :href="card.url"
         :class="'home-tile ' + card.span"
         :style="'--accent:' + card.accent"
@@ -62,6 +62,14 @@ import { repoIndex } from '../lib/store'
 const repoCount = computed(
   () => Object.values(repoIndex()).filter((r) => !r.fork && !r.archived).length,
 )
+
+// Hide a nav card whose section isn't configured, so dropping `openSource` or
+// `apps` from the config never leaves a dead internal link on the home page.
+const visibleCards = config.navCards.filter((c) => {
+  if (c.url === '/open-source') return !!config.openSource
+  if (c.url === '/apps') return !!(config.apps && Array.isArray(config.apps.items) && config.apps.items.length > 0)
+  return true
+})
 </script>
 
 <style scoped>

@@ -6,3 +6,8 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Your real config — copy site.config.example.ts to site.config.ts and edit.
+# Kept out of git so personal details aren't committed to the template.
+site.config.ts
+site.config.local.ts

@@ -1,0 +1,64 @@
+<template>
+  <div class="showcase">
+    <div class="sc-bar">
+      <a class="sc-back" href="/">
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Index
+      </a>
+      <span class="sc-bar-label">Open Source</span>
+    </div>
+
+    <header class="sc-hero">
+      <h1 class="sc-title">Open Source</h1>
+      <p class="sc-sub">{{ subtitle() }}</p>
+    </header>
+
+    <main class="grid" aria-label="Open source projects">
+      <a
+        u-for="tile in tiles()"
+        :class="'tile tile--' + tile.span + ' tile--' + tile.variant + (tile.bigStat ? ' tile--has-stat' : '')"
+        :style="tile.styleVars"
+        :href="tile.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="tile-top">
+          <span class="tile-stat" u-if="tile.bigStat" aria-hidden="true">
+            <span class="tile-stat-num">{{ tile.stars }}</span>
+            <span class="tile-stat-lbl">★ stars</span>
+          </span>
+          <span class="tile-badge" u-if="tile.badge">{{ tile.badge }}</span>
+        </div>
+
+        <div class="tile-body">
+          <h2 class="tile-title">{{ tile.title }}</h2>
+          <p class="tile-tagline" u-if="tile.tagline">{{ tile.tagline }}</p>
+          <p class="tile-desc" u-if="tile.desc">{{ tile.desc }}</p>
+        </div>
+
+        <div class="tile-meta">
+          <span class="tile-stars" u-if="tile.stars" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 6.3 6.8.7-5.1 4.6 1.5 6.7L12 17.9 5.9 21.6l1.5-6.7L2.3 9.6l6.8-.7z"/></svg>
+            {{ tile.stars }}
+          </span>
+          <span class="tile-lang" u-if="tile.language">
+            <i class="dot" aria-hidden="true"></i>{{ tile.language }}
+          </span>
+        </div>
+      </a>
+    </main>
+  </div>
+</template>
+
+<script>
+import { computed } from '@matthesketh/utopia-core'
+import { config } from '../../site.config'
+import { repoIndex } from '../lib/store'
+import { buildRepoTiles } from '../lib/tiles'
+import '../styles/showcase.css'
+
+const tiles = computed(() => buildRepoTiles(config.openSource, repoIndex()))
+const subtitle = computed(
+  () => tiles().length + ' public repositories — libraries, tools, MCP servers and experiments, pulled live from GitHub.',
+)
+</script>

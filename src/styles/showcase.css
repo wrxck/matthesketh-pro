@@ -328,26 +328,40 @@
   .tile--tall { grid-column: span 1; grid-row: span 2; }
 }
 
+/* mobile stays a real 2-column bento — scaled down, not a single column */
 @media (max-width: 639px) {
   .grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 150px;
+    gap: 10px;
+    padding: 0.5rem 1rem 3rem;
   }
-  .tile,
+  .tile { padding: 0.95rem; gap: 0.5rem; }
   .tile--sm,
-  .tile--md,
-  .tile--wide,
+  .tile--md   { grid-column: span 1; grid-row: span 1; }
+  .tile--wide { grid-column: span 2; grid-row: span 1; }
   .tile--tall,
-  .tile--lg {
-    grid-column: span 1;
-    grid-row: auto;
-    min-height: 150px;
-  }
-  .tile--lg { min-height: 200px; }
-  .tile--md .tile-desc,
-  .tile--wide .tile-desc { display: -webkit-box; }
-  .sc-hero { padding-top: 2rem; }
+  .tile--lg   { grid-column: span 1; grid-row: span 2; }
+
+  /* centre poster/large content on mobile so tall tiles don't read empty */
+  .tile--has-stat,
+  .tile--lg,
+  .tile--tall { justify-content: center; }
+  .tile--has-stat .tile-body,
+  .tile--lg .tile-body,
+  .tile--tall .tile-body { margin-top: 0; }
+
+  .tile-title { font-size: 1rem; }
+  .tile--lg .tile-title,
+  .tile--tall .tile-title,
+  .tile--wide .tile-title { font-size: 1.2rem; }
+  .tile-tagline { font-size: 0.8rem; }
+  .tile-desc { display: none; }            /* too tight to read at this size */
+  .tile-meta { font-size: 0.72rem; gap: 0.3rem 0.6rem; }
+  .tile-stat-num { font-size: 2.4rem; }
+  .tile-appicon { width: 48px; height: 48px; }
+
+  .sc-hero { padding: 2rem 1rem 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

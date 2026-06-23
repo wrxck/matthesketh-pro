@@ -13,11 +13,11 @@ export const config = {
   url: 'https://matthesketh.pro',
   bio: 'Full-stack engineer with a focus on web platforms, mainframe systems, and AI tooling. I build things that work — from COBOL batch jobs to reactive frontends.',
   navCards: [
-    { title: 'Open Source Software', description: 'Libraries, tools, and MCP servers', url: '/open-source' },
-    { title: 'Apps', description: "Things I've shipped", url: '/apps' },
-    { title: 'CV', description: 'Experience, skills, and projects', url: 'https://cv.matthesketh.pro' },
-    { title: 'Blog', description: 'Writing about engineering and building', url: 'https://blog.matthesketh.pro' },
-    { title: 'GitHub', description: 'Open source and side projects', url: 'https://github.com/wrxck', external: true },
+    { title: 'Open Source Software', kind: 'code', description: 'Libraries, tools, and MCP servers', url: '/open-source', accent: '#6b7cff', span: 'lg', live: 'repos' },
+    { title: 'Apps', kind: 'products', description: "Things I've shipped", url: '/apps', accent: '#16a34a', span: 'sm' },
+    { title: 'CV', kind: 'career', description: 'Experience, skills, and projects', url: 'https://cv.matthesketh.pro', accent: '#d9a14a', span: 'sm' },
+    { title: 'Blog', kind: 'writing', description: 'Writing about engineering and building', url: 'https://blog.matthesketh.pro', accent: '#c0653b', span: 'wide' },
+    { title: 'GitHub', kind: 'profile', description: 'Open source and side projects', url: 'https://github.com/wrxck', external: true, accent: '#8b6fc9', span: 'sm' },
   ],
   contact: {
     email: 'matt@matthesketh.pro',

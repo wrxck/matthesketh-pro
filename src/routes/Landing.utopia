@@ -94,7 +94,7 @@ const visibleCards = config.navCards.filter((c) => {
   letter-spacing: -1.5px;
   line-height: 1.08;
   margin: 0;
-  color: #111110;
+  color: var(--text);
   display: inline-flex;
   align-items: center;
 }
@@ -110,12 +110,12 @@ const visibleCards = config.navCards.filter((c) => {
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0.5rem 0 0;
-  color: #111110;
+  color: var(--text);
 }
 .bio {
   font-size: 1.05rem;
   line-height: 1.75;
-  color: #333;
+  color: var(--text-muted);
   margin: 1.1rem 0 0;
   max-width: 60ch;
 }
@@ -130,16 +130,16 @@ const visibleCards = config.navCards.filter((c) => {
 }
 
 .home-tile {
-  --accent: #111110;
+  --accent: var(--text);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.75rem;
   padding: 1.3rem;
-  background: #ffffff;
-  color: #111110;
-  border: 1px solid #111110;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
   text-decoration: none;
   overflow: hidden;
   animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
@@ -208,14 +208,14 @@ const visibleCards = config.navCards.filter((c) => {
   font-weight: 700;
   letter-spacing: -0.3px;
   margin: 0;
-  color: #111110;
+  color: var(--text);
   word-break: break-word;
 }
 .home-tile.lg .t-name { font-size: 1.75rem; letter-spacing: -0.6px; }
 .t-desc {
   font-size: 0.85rem;
   line-height: 1.45;
-  color: #555;
+  color: var(--text-muted);
   margin: 0.3rem 0 0;
 }
 /* flagship live stat — fills the large tile, ties to the showcase posters */
@@ -267,13 +267,13 @@ const visibleCards = config.navCards.filter((c) => {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  color: #111110;
+  color: var(--text);
   text-decoration: none;
   font-weight: 600;
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s ease;
 }
-.social-link:hover { border-color: #111110; }
+.social-link:hover { border-color: var(--border); }
 
 /* --- keyframes --- */
 @keyframes caret-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }

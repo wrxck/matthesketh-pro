@@ -3,12 +3,13 @@
 
    Kept as a plain global stylesheet (not a component's scoped <style>) because
    in this Utopia version route pages are rendered directly and both showcase
-   pages render the grid inline. One source of truth for both.
+   pages render the grid inline. One source of truth for both. Colours come
+   from the theme tokens in global.css so light/dark just works.
 --------------------------------------------------------------------------- */
 
 .showcase {
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
 }
@@ -23,16 +24,16 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.85rem 1.5rem;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--bar-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid #111110;
+  border-bottom: 1px solid var(--border);
 }
 .sc-back {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #111110;
+  color: var(--text);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.9rem;
@@ -44,7 +45,7 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #6b6a64;
+  color: var(--text-faint);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,12 +65,12 @@
   letter-spacing: -1.5px;
   line-height: 1.04;
   margin: 0;
-  color: #111110;
+  color: var(--text);
 }
 .sc-sub {
   margin: 0.6rem 0 0;
   font-size: 1.02rem;
-  color: #4a4943;
+  color: var(--text-muted);
   max-width: 52ch;
 }
 
@@ -95,11 +96,13 @@
 
 /* --- tile --- */
 .tile {
-  --tile-bg: #ffffff;
-  --tile-ink: #111110;
-  --tile-accent: #111110;
-  --tile-muted: #6b6a64;
-  --tile-border: #111110;
+  /* defaults; per-tile inline styleVars override these. 'light' variant tiles
+     resolve to var(--surface)/--text/--border so they flip with the theme. */
+  --tile-bg: var(--surface);
+  --tile-ink: var(--text);
+  --tile-accent: var(--text);
+  --tile-muted: var(--text-faint);
+  --tile-border: var(--border);
 
   position: relative;
   display: flex;
@@ -280,14 +283,14 @@
   justify-content: center;
   color: #ffffff;
   flex: none;
-  box-shadow: 0 2px 0 0 rgba(17, 17, 16, 0.18);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.18);
 }
 
 /* --- ghost / coming-soon tile --- */
 .tile--ghost {
   background: transparent;
-  border: 1px dashed #c9c7bf;
-  color: #8c8a83;
+  border: 1px dashed var(--border-faint);
+  color: var(--text-faint);
   align-items: flex-start;
   justify-content: center;
   text-align: left;
@@ -303,7 +306,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-  color: #a8a69d;
+  color: var(--text-faint);
 }
 .tile-ghost-title {
   font-family: var(--font-heading);
@@ -311,13 +314,13 @@
   font-weight: 700;
   letter-spacing: -0.4px;
   margin: 0.5rem 0 0;
-  color: #6b6a64;
+  color: var(--text-muted);
 }
 .tile-ghost-sub {
   margin: 0.4rem 0 0;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #8c8a83;
+  color: var(--text-faint);
 }
 
 /* --- responsive --- */

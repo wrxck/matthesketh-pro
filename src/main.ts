@@ -4,7 +4,11 @@ import App from './App.utopia'
 import { config } from '../site.config'
 import { hydrateRepoIndex } from './lib/store'
 import { installShowcaseKeys } from './lib/showcase'
+import { initTheme } from './lib/theme'
 import './global.css'
+
+// Sync theme state, watch the OS for `auto`, enable smooth switching.
+initTheme()
 
 // The two showcases are optional. A fork that drops `openSource` or `apps`
 // from site.config.ts gets the route (and its data fetch) skipped entirely,

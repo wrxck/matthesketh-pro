@@ -35,7 +35,6 @@ interface ThemeInput {
   muted?: string
 }
 
-const PAPER = '#ffffff'
 const INK = '#111110'
 
 interface ResolvedTheme {
@@ -67,13 +66,14 @@ function resolveTheme(theme: ThemeInput): ResolvedTheme {
       border: INK,
     }
   }
-  // light
+  // light — resolves to theme tokens so these tiles flip with the mode
+  // (dark/paper variants above stay constant on purpose).
   return {
-    bg: theme.bg ?? PAPER,
-    ink: theme.ink ?? INK,
+    bg: theme.bg ?? 'var(--surface)',
+    ink: theme.ink ?? 'var(--text)',
     accent: theme.accent,
-    muted: theme.muted ?? '#6b6a64',
-    border: INK,
+    muted: theme.muted ?? 'var(--text-faint)',
+    border: 'var(--border)',
   }
 }
 

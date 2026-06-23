@@ -1,12 +1,22 @@
 <template>
-  <RouterView />
+  <div class="app-root">
+    <ThemeToggle />
+    <RouterView />
+  </div>
 </template>
 
 <script>
 import { createRouterView } from '@matthesketh/utopia-router'
+import ThemeToggle from './components/ThemeToggle.utopia'
 
 // createRouterView() already returns a component ({ render: () => Node }),
 // so assign it directly — wrapping it in another render() returns an object
 // instead of a Node and breaks mounting.
 const RouterView = createRouterView()
 </script>
+
+<style scoped>
+.app-root {
+  display: contents;
+}
+</style>

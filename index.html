@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash.
+    (function () {
+      try {
+        var p = localStorage.getItem('theme') || 'auto';
+        var dark = p === 'dark' || (p === 'auto' &&
+          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var r = document.documentElement;
+        r.setAttribute('data-theme', dark ? 'dark' : 'light');
+        r.setAttribute('data-theme-pref', p);
+      } catch (e) {}
+    })();
+  </script>
   <title>{{name}} — {{title}}</title>
   <meta name="description" content="{{name}} — {{description}}">
   <meta name="robots" content="index, follow">

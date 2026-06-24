@@ -50,6 +50,7 @@
           LinkedIn
         </a>
       </div>
+      <p class="contact-legal" style="margin: 1.25rem 0 0;"><a href="/privacy" style="color: var(--text-faint); font-size: 0.8rem; text-decoration: none;">Privacy</a></p>
     </footer>
   </div>
 </template>

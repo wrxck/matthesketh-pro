@@ -22,6 +22,8 @@ if (config.apps && Array.isArray(config.apps.items) && config.apps.items.length 
   routes.push({ path: '/apps', component: () => import('./routes/Apps.utopia') })
 }
 
+routes.push({ path: '/privacy', component: () => import('./routes/Privacy.utopia') })
+
 createRouter(routes)
 
 // Kick off the one-time GitHub fetch only when the Open Source showcase is

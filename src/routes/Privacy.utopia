@@ -1,0 +1,72 @@
+<template>
+  <div class="legal">
+    <h1 class="legal-title">Privacy Policy</h1>
+    <p class="legal-updated">Last updated: 24 June 2026</p>
+
+    <p>This site (matthesketh.pro) is the personal website of Matt Hesketh. This policy explains what data is collected and how it is used.</p>
+
+    <h2>Advertising &amp; cookies</h2>
+    <p>This site uses Google AdSense. Third-party vendors, including Google, use cookies and similar identifiers to serve ads based on a user's prior visits to this and other websites.</p>
+    <ul>
+      <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the internet.</li>
+      <li>You can opt out of personalised advertising via <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>, or opt out of third-party vendors' cookies at <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>.</li>
+    </ul>
+
+    <h2>Consent (EEA, UK &amp; Switzerland)</h2>
+    <p>Visitors in the EEA, UK and Switzerland are shown a consent message (Google's Consent Management Platform) before personalised ads are served, in line with GDPR and the ePrivacy Directive. You can change or withdraw consent at any time via the privacy options on the consent banner.</p>
+
+    <h2>Your rights</h2>
+    <p>You can request access to, correction of, or deletion of any personal data held about you, and may lodge a complaint with the ICO or your local data-protection authority. To do so, use the contact below.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy? Email <a href="mailto:matt@matthesketh.pro">matt@matthesketh.pro</a>.</p>
+
+    <p class="legal-back"><a href="/">Back home</a></p>
+  </div>
+</template>
+
+<script></script>
+
+<style scoped>
+.legal {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.legal-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin: 0 0 0.25rem;
+}
+.legal-updated {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 2rem;
+}
+.legal h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: 2rem 0 0.5rem;
+}
+.legal a {
+  color: var(--text);
+}
+.legal ul {
+  padding-left: 1.2rem;
+}
+.legal li {
+  margin: 0.4rem 0;
+}
+.legal-back {
+  margin-top: 2.5rem;
+}
+.legal-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.legal-back a:hover {
+  color: var(--text);
+}
+</style>

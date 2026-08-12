@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, rm, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 import type { Plugin } from 'vite'
@@ -6,6 +6,10 @@ import type { Plugin } from 'vite'
 import { config } from './site.config'
 
 const PLACEHOLDER = /\{\{(\w+(?:\.\w+)*)\}\}/g
+
+// an optional block: kept when the key has a value, removed entirely when it
+// does not, so a fork that sets no ad account ships no ad markup at all
+const OPTIONAL_BLOCK = /[ \t]*<!--\{\{#(\w+(?:\.\w+)*)\}\}-->\n?([\s\S]*?)[ \t]*<!--\{\{\/\1\}\}-->\n?/g
 
 function lookup(path: string): unknown {
     return path.split('.').reduce<unknown>((current, key) => {
@@ -15,15 +19,25 @@ function lookup(path: string): unknown {
 }
 
 function render(text: string): string {
-    return text.replace(PLACEHOLDER, (_, path: string) => {
-        const value = lookup(path)
-        return value != null ? String(value) : ''
-    })
+    return text
+        .replace(OPTIONAL_BLOCK, (_, path: string, body: string) => (lookup(path) ? body : ''))
+        .replace(PLACEHOLDER, (_, path: string) => {
+            const value = lookup(path)
+            return value != null ? String(value) : ''
+        })
 }
 
-// the manifest is copied out of public/ verbatim, so it is rendered afterwards
-// rather than through transformIndexHtml
-const MANIFEST = 'site.webmanifest'
+// files copied out of public/ verbatim, so they are rendered afterwards rather
+// than through transformIndexHtml. `requires` names a config value the file is
+// meaningless without: when it is unset the file is dropped from the build, so
+// a fork never ships a half-filled ads.txt naming nobody.
+const PUBLIC_TEMPLATES: Array<{ file: string; type: string; requires?: string }> = [
+    { file: 'site.webmanifest', type: 'application/manifest+json' },
+    { file: 'ads.txt', type: 'text/plain', requires: 'adsense.publisherId' },
+    { file: 'favicon.svg', type: 'image/svg+xml' },
+    { file: 'apple-touch-icon.svg', type: 'image/svg+xml' },
+    { file: 'mask-icon.svg', type: 'image/svg+xml' },
+]
 
 export function htmlConfig(): Plugin {
     let outDir = 'dist'
@@ -41,10 +55,16 @@ export function htmlConfig(): Plugin {
 
         configureServer(server) {
             server.middlewares.use(async (req, res, next) => {
-                if (req.url?.split('?')[0] !== `/${MANIFEST}`) return next()
+                const path = req.url?.split('?')[0]
+                const template = PUBLIC_TEMPLATES.find((t) => path === `/${t.file}`)
+                if (!template) return next()
+                if (template.requires && !lookup(template.requires)) {
+                    res.statusCode = 404
+                    return res.end()
+                }
                 try {
-                    const source = await readFile(resolve(server.config.publicDir, MANIFEST), 'utf8')
-                    res.setHeader('Content-Type', 'application/manifest+json')
+                    const source = await readFile(resolve(server.config.publicDir, template.file), 'utf8')
+                    res.setHeader('Content-Type', template.type)
                     res.end(render(source))
                 } catch {
                     next()
@@ -53,11 +73,17 @@ export function htmlConfig(): Plugin {
         },
 
         async closeBundle() {
-            const target = resolve(outDir, MANIFEST)
-            try {
-                await writeFile(target, render(await readFile(target, 'utf8')))
-            } catch {
-                // no manifest in this build, which is not an error
+            for (const template of PUBLIC_TEMPLATES) {
+                const target = resolve(outDir, template.file)
+                try {
+                    if (template.requires && !lookup(template.requires)) {
+                        await rm(target, { force: true })
+                        continue
+                    }
+                    await writeFile(target, render(await readFile(target, 'utf8')))
+                } catch {
+                    // the file is not in this build, which is not an error
+                }
             }
         },
     }

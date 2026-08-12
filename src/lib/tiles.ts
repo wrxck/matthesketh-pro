@@ -22,6 +22,7 @@ export interface Tile {
   stars: number | null
   language: string | null
   glyph: string | null
+  icon: string | null
   variant: string
   styleVars: string
   bigStat: boolean
@@ -170,6 +171,7 @@ export function buildRepoTiles(
       stars,
       language: meta?.language ?? null,
       glyph: null,
+      icon: null,
       variant: f.theme.variant ?? 'light',
       styleVars: styleVars(theme),
       bigStat: (sp === 'lg' || sp === 'tall') && (stars ?? 0) >= 10,
@@ -198,6 +200,7 @@ export function buildRepoTiles(
         stars: r.stars,
         language: r.language,
         glyph: null,
+        icon: null,
         variant: 'light',
         styleVars: styleVars(resolveTheme({ variant: 'light', accent })),
         bigStat: false,
@@ -218,6 +221,7 @@ export function buildAppTiles(
       ctaLabel?: string
       span?: string
       glyph?: string
+      icon?: string
       badge?: string
       theme: ThemeInput
     }>
@@ -238,6 +242,7 @@ export function buildAppTiles(
       stars: null,
       language: null,
       glyph: a.glyph ?? null,
+      icon: a.icon ?? null,
       variant: a.theme.variant ?? 'paper',
       styleVars: styleVars(theme),
       bigStat: false,

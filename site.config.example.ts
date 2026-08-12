@@ -20,11 +20,19 @@ const DESCRIPTION = 'Your one-line description.'
 
 export const config = {
   name: NAME,
+  // drawn in the favicon and touch icons, so a fork gets its own letter
+  initial: NAME.charAt(0).toUpperCase(),
   title: TITLE,
   description: DESCRIPTION,
   locale: 'en_GB',
   themeColor: '#ffffff',
   url: 'https://yourdomain.com',
+
+  // your own adsense account, if you have one. leave publisherId empty and both
+  // the ad script and ads.txt drop out of the build entirely.
+  adsense: {
+    publisherId: '',
+  },
   bio: 'Full-stack engineer with a focus on web platforms. Edit this in site.config.ts.',
 
   // Home page is a bento of these cards. Each is fully configurable:

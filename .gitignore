@@ -11,3 +11,9 @@ dist/
 # Kept out of git so personal details aren't committed to the template.
 site.config.ts
 site.config.local.ts
+
+# Anything belonging to your instance rather than the template: app icons,
+# product artwork, logos, screenshots. This repository is a public template,
+# so brand assets you own must stay out of it. Reference them from
+# site.config.ts as /instance/<file>.
+public/instance/

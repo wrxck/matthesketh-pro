@@ -286,6 +286,15 @@
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.18);
 }
 
+/* a real app icon already carries its own corners and shadow, so the plate
+   behind the glyph fallback would only double them up */
+.tile-appicon--image {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 /* --- ghost / coming-soon tile --- */
 .tile--ghost {
   background: transparent;

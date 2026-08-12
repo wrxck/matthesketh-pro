@@ -1,0 +1,65 @@
+<template>
+  <div class="showcase">
+    <div class="sc-bar">
+      <a class="sc-back" href="/">
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        {{ copy.showcase.back }}
+      </a>
+      <span class="sc-bar-label">{{ copy.apps.barLabel }}</span>
+    </div>
+
+    <header class="sc-hero">
+      <h1 class="sc-title">{{ copy.apps.title }}</h1>
+      <p class="sc-sub">{{ subtitle }}</p>
+    </header>
+
+    <main class="grid" :aria-label="copy.apps.gridLabel">
+      <a
+        u-for="tile in tiles()"
+        :class="'tile tile--' + tile.span + ' tile--' + tile.variant"
+        :style="tile.styleVars"
+        :href="tile.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="tile-top">
+          <span class="tile-appicon" u-if="tile.glyph === 'whey'" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>
+          </span>
+          <span class="tile-badge" u-if="tile.badge">{{ tile.badge }}</span>
+        </div>
+
+        <div class="tile-body">
+          <h2 class="tile-title">{{ tile.title }}</h2>
+          <p class="tile-tagline" u-if="tile.tagline">{{ tile.tagline }}</p>
+          <p class="tile-desc" u-if="tile.desc">{{ tile.desc }}</p>
+        </div>
+
+        <div class="tile-meta">
+          <span class="tile-cta" u-if="tile.ctaLabel">{{ tile.ctaLabel }} →</span>
+        </div>
+      </a>
+
+      <div class="tile tile--lg tile--ghost" aria-hidden="true">
+        <div class="tile-top">
+          <span class="tile-ghost-label">{{ copy.apps.ghostLabel }}</span>
+        </div>
+        <div class="tile-body">
+          <p class="tile-ghost-title">{{ copy.apps.ghostTitle }}</p>
+          <p class="tile-ghost-sub">{{ copy.apps.ghostBody }}</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+import { config } from '../../site.config'
+import { buildAppTiles } from '../lib/tiles'
+import { copy } from '../lib/copy'
+import '../styles/showcase.css'
+
+const appTiles = buildAppTiles(config.apps)
+const tiles = () => appTiles
+const subtitle = copy.apps.subtitle
+</script>

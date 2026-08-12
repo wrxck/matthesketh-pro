@@ -1,0 +1,75 @@
+<template>
+  <div class="legal">
+    <h1 class="legal-title">{{ copy.privacy.title }}</h1>
+    <p class="legal-updated">{{ copy.privacy.updated }}</p>
+
+    <p>{{ copy.privacy.intro }}</p>
+
+    <h2>{{ copy.privacy.advertisingHeading }}</h2>
+    <p>{{ copy.privacy.advertisingBody }}</p>
+    <ul>
+      <li>{{ copy.privacy.cookiesBullet }}</li>
+      <li>{{ copy.privacy.optOutBefore }}<a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">{{ copy.privacy.optOutGoogleLabel }}</a>{{ copy.privacy.optOutBetween }}<a href="https://www.aboutads.info" target="_blank" rel="noopener">{{ copy.privacy.optOutAboutAdsLabel }}</a>{{ copy.privacy.optOutAfter }}</li>
+    </ul>
+
+    <h2>{{ copy.privacy.consentHeading }}</h2>
+    <p>{{ copy.privacy.consentBody }}</p>
+
+    <h2>{{ copy.privacy.rightsHeading }}</h2>
+    <p>{{ copy.privacy.rightsBody }}</p>
+
+    <h2>{{ copy.privacy.contactHeading }}</h2>
+    <p>{{ copy.privacy.contactBefore }}<a :href="'mailto:' + config.contact.email">{{ config.contact.email }}</a>{{ copy.privacy.contactAfter }}</p>
+
+    <p class="legal-back"><a href="/">{{ copy.privacy.back }}</a></p>
+  </div>
+</template>
+
+<script>
+import { config } from '../../site.config'
+import { copy } from '../lib/copy'
+</script>
+
+<style scoped>
+.legal {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.legal-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin: 0 0 0.25rem;
+}
+.legal-updated {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 2rem;
+}
+.legal h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: 2rem 0 0.5rem;
+}
+.legal a {
+  color: var(--text);
+}
+.legal ul {
+  padding-left: 1.2rem;
+}
+.legal li {
+  margin: 0.4rem 0;
+}
+.legal-back {
+  margin-top: 2.5rem;
+}
+.legal-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.legal-back a:hover {
+  color: var(--text);
+}
+</style>

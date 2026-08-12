@@ -15,7 +15,9 @@ A minimal, config-driven personal landing page built with [UtopiaJS](https://git
 git clone https://github.com/wrxck/matthesketh-pro.git my-site
 cd my-site
 
-# 2. Edit site.config.ts with your details
+# 2. Create your config from the example and fill in your details
+cp site.config.example.ts site.config.ts
+
 # 3. Install and build
 pnpm install
 pnpm build
@@ -25,7 +27,7 @@ The build will fail if `site.config.ts` still contains placeholder values — yo
 
 ## Configuration
 
-Edit `site.config.ts` at the project root. All fields are required:
+Copy `site.config.example.ts` to `site.config.ts` and edit it. `site.config.ts` is gitignored, so your details never get committed to the template. The **Open Source** and **Apps** showcases are optional — delete their blocks to drop the section (route and home tile go with it). Core fields:
 
 | Field | Description |
 |-------|-------------|
@@ -40,6 +42,7 @@ Edit `site.config.ts` at the project root. All fields are required:
 | `contact.email` | Your email address |
 | `contact.github` | Your GitHub profile URL |
 | `contact.linkedin` | Your LinkedIn profile URL |
+| `copy` | Every other word on the site — headings, labels, link text, accessible names and the privacy page. Typed by `src/lib/copy.ts`, so a mistyped key fails the build rather than rendering blank |
 
 ## Local Development
 

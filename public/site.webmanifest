@@ -1,6 +1,6 @@
 {
-  "name": "Matt Hesketh",
-  "short_name": "Matt Hesketh",
+  "name": "{{name}}",
+  "short_name": "{{name}}",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -14,7 +14,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "{{themeColor}}",
+  "background_color": "{{themeColor}}",
   "display": "standalone"
 }

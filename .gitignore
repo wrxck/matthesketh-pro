@@ -12,6 +12,11 @@ dist/
 site.config.ts
 site.config.local.ts
 
+# Working notes and scratch files that are about this deployment rather than
+# the template.
+findings/
+download.html
+
 # Anything belonging to your instance rather than the template: app icons,
 # product artwork, logos, screenshots. This repository is a public template,
 # so brand assets you own must stay out of it. Reference them from

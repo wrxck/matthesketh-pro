@@ -15,7 +15,19 @@ export const repoIndex = signal<RepoIndex>({})
 
 let started = false
 
-/** Kick off the one-time repo fetch and hydrate the signal when it resolves. */
+/**
+ * How many public repositories to claim, counted once so the home tile and the
+ * showcase subtitle cannot disagree.
+ *
+ * This counts live GitHub data, not tiles. A curated repo that no longer
+ * resolves still renders a tile — that is deliberate graceful degradation —
+ * but it is not a repository, so counting tiles would overstate the number.
+ */
+export function liveRepoCount(index: RepoIndex): number {
+  return Object.values(index).filter((r) => !r.fork && !r.archived).length
+}
+
+/** kick off the one-time repo fetch and hydrate the signal when it resolves. */
 export function hydrateRepoIndex(username: string): void {
   if (started) return
   started = true

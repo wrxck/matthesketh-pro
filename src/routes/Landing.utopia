@@ -58,12 +58,10 @@
 <script>
 import { computed } from '@matthesketh/utopia-core'
 import { config } from '../../site.config'
-import { repoIndex } from '../lib/store'
+import { liveRepoCount, repoIndex } from '../lib/store'
 import { copy } from '../lib/copy'
 
-const repoCount = computed(
-  () => Object.values(repoIndex()).filter((r) => !r.fork && !r.archived).length,
-)
+const repoCount = computed(() => liveRepoCount(repoIndex()))
 
 // Hide a nav card whose section isn't configured, so dropping `openSource` or
 // `apps` from the config never leaves a dead internal link on the home page.

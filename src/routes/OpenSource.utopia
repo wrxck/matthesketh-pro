@@ -53,11 +53,12 @@
 <script>
 import { computed } from '@matthesketh/utopia-core'
 import { config } from '../../site.config'
-import { repoIndex } from '../lib/store'
+import { liveRepoCount, repoIndex } from '../lib/store'
 import { buildRepoTiles } from '../lib/tiles'
 import { copy } from '../lib/copy'
 import '../styles/showcase.css'
 
 const tiles = computed(() => buildRepoTiles(config.openSource, repoIndex()))
-const subtitle = computed(() => tiles().length + copy.openSource.subtitleSuffix)
+// the same count the home tile shows: repositories on github, not tiles drawn
+const subtitle = computed(() => liveRepoCount(repoIndex()) + copy.openSource.subtitleSuffix)
 </script>

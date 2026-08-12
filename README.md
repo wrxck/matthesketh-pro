@@ -42,6 +42,7 @@ Copy `site.config.example.ts` to `site.config.ts` and edit it. `site.config.ts` 
 | `contact.email` | Your email address |
 | `contact.github` | Your GitHub profile URL |
 | `contact.linkedin` | Your LinkedIn profile URL |
+| `copy` | Every other word on the site — headings, labels, link text, accessible names and the privacy page. Typed by `src/lib/copy.ts`, so a mistyped key fails the build rather than rendering blank |
 
 ## Local Development
 

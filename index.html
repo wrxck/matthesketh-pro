@@ -16,19 +16,19 @@
       } catch (e) {}
     })();
   </script>
-  <title>{{name}} — {{title}}</title>
-  <meta name="description" content="{{name}} — {{description}}">
+  <title>{{copy.meta.title}}</title>
+  <meta name="description" content="{{copy.meta.description}}">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="{{themeColor}}">
   <link rel="canonical" href="{{url}}/">
-  <meta property="og:title" content="{{name}} — {{title}}">
-  <meta property="og:description" content="{{description}}">
+  <meta property="og:title" content="{{copy.meta.title}}">
+  <meta property="og:description" content="{{copy.meta.socialDescription}}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{url}}/">
   <meta property="og:locale" content="{{locale}}">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="{{name}} — {{title}}">
-  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:title" content="{{copy.meta.title}}">
+  <meta name="twitter:description" content="{{copy.meta.socialDescription}}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.svg" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
@@ -55,7 +55,7 @@
 <body>
   <div id="app"></div>
   <noscript>
-    <p>{{name}} — {{title}}. Enable JavaScript to view.</p>
+    <p>{{copy.meta.noscript}}</p>
   </noscript>
   <script type="module" src="/src/main.ts"></script>
 </body>

@@ -12,10 +12,16 @@
 // Shared theme tokens for showcase tiles — retune the whole palette here.
 const INK = '#111110'
 
+// hoisted so the meta copy further down can compose the exact strings that end
+// up in <title> and the social cards.
+const NAME = 'Your Name'
+const TITLE = 'Software Engineer'
+const DESCRIPTION = 'Your one-line description.'
+
 export const config = {
-  name: 'Your Name',
-  title: 'Software Engineer',
-  description: 'Your one-line description.',
+  name: NAME,
+  title: TITLE,
+  description: DESCRIPTION,
   locale: 'en_GB',
   themeColor: '#ffffff',
   url: 'https://yourdomain.com',
@@ -115,5 +121,104 @@ export const config = {
         theme: { variant: 'paper', bg: '#f4f3ef', ink: '#111110', accent: '#16a34a', muted: '#4a4943' },
       },
     ],
+  },
+
+  // -------------------------------------------------------------------------
+  // copy — every remaining word on the site.
+  //
+  // headings, labels, link text, accessible names and the whole privacy page
+  // live here, alongside the names, descriptions and taglines above, so the
+  // site can be reworded without opening a template. `src/lib/copy.ts` types
+  // this block: rename a key there and here, or the build stops.
+  //
+  // leading and trailing spaces are load-bearing where a string sits next to a
+  // link or a number — keep them.
+  // -------------------------------------------------------------------------
+  copy: {
+    // <head>: title is reused for og:title and twitter:title, and
+    // socialDescription for og:description and twitter:description.
+    meta: {
+      title: `${NAME} — ${TITLE}`,
+      description: `${NAME} — ${DESCRIPTION}`,
+      socialDescription: DESCRIPTION,
+      noscript: `${NAME} — ${TITLE}. Enable JavaScript to view.`,
+    },
+
+    // the light/auto/dark switch, top right on every page
+    theme: {
+      groupLabel: 'Theme',
+      lightLabel: 'Light theme',
+      lightTitle: 'Light',
+      autoLabel: 'System theme',
+      autoTitle: 'Auto (system)',
+      darkLabel: 'Dark theme',
+      darkTitle: 'Dark',
+    },
+
+    landing: {
+      navLabel: 'Site navigation',
+      repoCountLabel: 'repositories · live',
+      emailLink: 'Email',
+      githubLink: 'GitHub',
+      linkedinLink: 'LinkedIn',
+      privacyLink: 'Privacy',
+    },
+
+    // the back link shared by both showcase pages
+    showcase: {
+      back: 'Index',
+    },
+
+    openSource: {
+      barLabel: 'Open Source',
+      title: 'Open Source',
+      // appended to the live repo count, so it starts with a space
+      subtitleSuffix:
+        ' public repositories — libraries, tools, MCP servers and experiments, pulled live from GitHub.',
+      gridLabel: 'Open source projects',
+      starsLabel: '★ stars',
+    },
+
+    apps: {
+      barLabel: 'Apps',
+      title: 'Apps',
+      subtitle: 'Products I design, build and ship end to end.',
+      gridLabel: 'Apps',
+      // the empty-state tile that keeps a one-app grid looking deliberate
+      ghostLabel: 'In the lab',
+      ghostTitle: 'More on the way',
+      ghostBody: 'New products in design and development — this grid grows as they ship.',
+    },
+
+    // the /privacy page — reword or trim it to match what you actually collect
+    privacy: {
+      title: 'Privacy Policy',
+      updated: 'Last updated: 1 January 2026',
+      intro:
+        'This site (yourdomain.com) is the personal website of Your Name. This policy explains what data is collected and how it is used.',
+      advertisingHeading: 'Advertising & cookies',
+      advertisingBody:
+        "This site uses Google AdSense. Third-party vendors, including Google, use cookies and similar identifiers to serve ads based on a user's prior visits to this and other websites.",
+      cookiesBullet:
+        "Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the internet.",
+      // this bullet wraps two links — the spaces at the edges are what keeps
+      // the sentence reading as one line
+      optOutBefore: 'You can opt out of personalised advertising via ',
+      optOutGoogleLabel: 'Google Ads Settings',
+      optOutBetween: ", or opt out of third-party vendors' cookies at ",
+      optOutAboutAdsLabel: 'aboutads.info',
+      optOutAfter: '.',
+      consentHeading: 'Consent (EEA, UK & Switzerland)',
+      consentBody:
+        "Visitors in the EEA, UK and Switzerland are shown a consent message (Google's Consent Management Platform) before personalised ads are served, in line with GDPR and the ePrivacy Directive. You can change or withdraw consent at any time via the privacy options on the consent banner.",
+      rightsHeading: 'Your rights',
+      rightsBody:
+        'You can request access to, correction of, or deletion of any personal data held about you, and may lodge a complaint with the ICO or your local data-protection authority. To do so, use the contact below.',
+      contactHeading: 'Contact',
+      // wraps the mailto link, which takes its address from contact.email above
+      contactBefore: 'Questions about this policy? Email ',
+      contactAfter: '.',
+      back: 'Back home',
+    },
   },
 }

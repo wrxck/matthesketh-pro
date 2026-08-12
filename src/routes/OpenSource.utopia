@@ -3,17 +3,17 @@
     <div class="sc-bar">
       <a class="sc-back" href="/">
         <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        Index
+        {{ copy.showcase.back }}
       </a>
-      <span class="sc-bar-label">Open Source</span>
+      <span class="sc-bar-label">{{ copy.openSource.barLabel }}</span>
     </div>
 
     <header class="sc-hero">
-      <h1 class="sc-title">Open Source</h1>
+      <h1 class="sc-title">{{ copy.openSource.title }}</h1>
       <p class="sc-sub">{{ subtitle() }}</p>
     </header>
 
-    <main class="grid" aria-label="Open source projects">
+    <main class="grid" :aria-label="copy.openSource.gridLabel">
       <a
         u-for="tile in tiles()"
         :class="'tile tile--' + tile.span + ' tile--' + tile.variant + (tile.bigStat ? ' tile--has-stat' : '')"
@@ -25,7 +25,7 @@
         <div class="tile-top">
           <span class="tile-stat" u-if="tile.bigStat" aria-hidden="true">
             <span class="tile-stat-num">{{ tile.stars }}</span>
-            <span class="tile-stat-lbl">★ stars</span>
+            <span class="tile-stat-lbl">{{ copy.openSource.starsLabel }}</span>
           </span>
           <span class="tile-badge" u-if="tile.badge">{{ tile.badge }}</span>
         </div>
@@ -55,10 +55,9 @@ import { computed } from '@matthesketh/utopia-core'
 import { config } from '../../site.config'
 import { repoIndex } from '../lib/store'
 import { buildRepoTiles } from '../lib/tiles'
+import { copy } from '../lib/copy'
 import '../styles/showcase.css'
 
 const tiles = computed(() => buildRepoTiles(config.openSource, repoIndex()))
-const subtitle = computed(
-  () => tiles().length + ' public repositories — libraries, tools, MCP servers and experiments, pulled live from GitHub.',
-)
+const subtitle = computed(() => tiles().length + copy.openSource.subtitleSuffix)
 </script>

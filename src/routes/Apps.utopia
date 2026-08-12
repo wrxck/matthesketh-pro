@@ -3,17 +3,17 @@
     <div class="sc-bar">
       <a class="sc-back" href="/">
         <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        Index
+        {{ copy.showcase.back }}
       </a>
-      <span class="sc-bar-label">Apps</span>
+      <span class="sc-bar-label">{{ copy.apps.barLabel }}</span>
     </div>
 
     <header class="sc-hero">
-      <h1 class="sc-title">Apps</h1>
+      <h1 class="sc-title">{{ copy.apps.title }}</h1>
       <p class="sc-sub">{{ subtitle }}</p>
     </header>
 
-    <main class="grid" aria-label="Apps">
+    <main class="grid" :aria-label="copy.apps.gridLabel">
       <a
         u-for="tile in tiles()"
         :class="'tile tile--' + tile.span + ' tile--' + tile.variant"
@@ -42,11 +42,11 @@
 
       <div class="tile tile--lg tile--ghost" aria-hidden="true">
         <div class="tile-top">
-          <span class="tile-ghost-label">In the lab</span>
+          <span class="tile-ghost-label">{{ copy.apps.ghostLabel }}</span>
         </div>
         <div class="tile-body">
-          <p class="tile-ghost-title">More on the way</p>
-          <p class="tile-ghost-sub">New products in design and development — this grid grows as they ship.</p>
+          <p class="tile-ghost-title">{{ copy.apps.ghostTitle }}</p>
+          <p class="tile-ghost-sub">{{ copy.apps.ghostBody }}</p>
         </div>
       </div>
     </main>
@@ -56,9 +56,10 @@
 <script>
 import { config } from '../../site.config'
 import { buildAppTiles } from '../lib/tiles'
+import { copy } from '../lib/copy'
 import '../styles/showcase.css'
 
 const appTiles = buildAppTiles(config.apps)
 const tiles = () => appTiles
-const subtitle = 'Products I design, build and ship end to end.'
+const subtitle = copy.apps.subtitle
 </script>
